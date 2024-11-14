@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:checked="true"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/menu_dashboard" />
+        <item
+            android:id="@+id/nav_wallet"
+            android:icon="@drawable/ic_wallet"
+            android:title="@string/menu_wallet" />
+        <item
+            android:id="@+id/nav_generate_lead"
+            android:icon="@drawable/ic_generate_lead"
+            android:title="Generate Lead" />
+        <item
+            android:id="@+id/nav_booking_request"
+            android:icon="@drawable/ic_booking_request"
+            android:title="@string/menu_booking_request" />
+        <item
+            android:id="@+id/nav_rejected_booking_request"
+            android:icon="@drawable/ic_booking_request"
+            android:title="Rejected Booking Request" />
+        <item
+            android:id="@+id/nav_motor_policy"
+            android:icon="@drawable/ic_motor_policy"
+            android:title="Motor Policy" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout_24"
+                android:title="@string/menu_logout" />
+        </menu>
+    </item>
+</menu>
