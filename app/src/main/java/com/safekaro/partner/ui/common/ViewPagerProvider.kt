@@ -1,11 +1,13 @@
 package com.safekaro.partner.ui.common
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -14,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.widget.ViewPager2
 import com.safekaro.partner.R
-import com.safekaro.partner.databinding.CustomNavItemBinding
 import com.safekaro.partner.ui.fragments.EmptyFragment
 import com.safekaro.partner.ui.fragments.HomeFragment
 import com.safekaro.partner.utils.getDrawableCompat
@@ -22,6 +23,8 @@ import com.safekaro.partner.utils.setGradientTextColor
 import com.safekaro.partner.utils.setTextColorByRes
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.safekaro.partner.databinding.TabItemNavBinding
+
 
 // Using like kotlin delegates
 interface ViewPagerProvider {
@@ -39,25 +42,30 @@ class ViewPagerProviderImpl : ViewPagerProvider, LifecycleEventObserver {
     private val defaultIndex = 0
     private val titleRes = intArrayOf(
         R.string.home,
-        R.string.renewals,
-        R.string.cases,
-        R.string.support,
-        R.string.more
+        R.string.team,
+        R.string.my_policy,
+        R.string.my_wallet,
     )
     private val iconRes = intArrayOf(
+        R.drawable.ic_nav_home_outline,
+        R.drawable.ic_nav_team,
+        R.drawable.ic_nav_policy,
+        R.drawable.ic_nav_wallet,
+    )
+    /*private val iconRes = intArrayOf(
         R.drawable.ic_home_selector,
         R.drawable.ic_renewals_selector,
         R.drawable.ic_cases_selector,
         R.drawable.ic_support_selector,
-        R.drawable.ic_more_selector
-    )
+        R.drawable.ic_more_selector,
+    )*/
+
     private val fragments by lazy {
         mutableListOf(
             HomeFragment(),
-            EmptyFragment.get(R.string.renewals),
-            EmptyFragment.get(R.string.cases),
-            EmptyFragment.get(R.string.support),
-            EmptyFragment.get(R.string.more)
+            EmptyFragment.get(R.string.team),
+            EmptyFragment.get(R.string.my_policy),
+            EmptyFragment.get(R.string.my_wallet),
         )
     }
 
@@ -100,7 +108,7 @@ class ViewPagerProviderImpl : ViewPagerProvider, LifecycleEventObserver {
         })
 
         TabLayoutMediator(tabLayout, viewPager, true , false) { tab, position ->
-            tab.customView = CustomNavItemBinding.inflate(inflater).apply {
+            tab.customView = TabItemNavBinding.inflate(inflater).apply {
                 title.setText(titleRes[position])
                 icon.setImageResource(iconRes[position])
             }.root
@@ -127,7 +135,9 @@ class ViewPagerProviderImpl : ViewPagerProvider, LifecycleEventObserver {
     private fun View.setBottomNavHover(position: Int, isSelected: Boolean) {
         findViewById<ImageView>(R.id.icon)?.apply {
             val size = if (isSelected) com.intuit.sdp.R.dimen._27sdp else com.intuit.sdp.R.dimen._27sdp
-            background = if (isSelected) getDrawableCompat(R.drawable.bg_nav_item_selected) else null
+            val color = if (isSelected) R.color.primary else R.color.nav_item_tint_default
+            setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.SRC_IN)
+            //background = if (isSelected) getDrawableCompat(R.drawable.bg_nav_item_selected) else null
             layoutParams = layoutParams.apply {
                 width = ViewGroup.LayoutParams.MATCH_PARENT
                 height = resources.getDimension(size).toInt()

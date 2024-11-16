@@ -25,93 +25,17 @@
                 android:background="@android:color/transparent"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:id="@+id/layUserMatches"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    tools:visibility="visible">
-
-                    <com.github.islamkhsh.CardSliderViewPager
-                        android:id="@+id/userMatchesSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:auto_slide_time="-1"
-                        app:cardSlider_indicator="@id/userMatchesSliderIndicator"
-                        app:cardSlider_otherPagesWidth="0dp"
-                        app:cardSlider_pageMargin="@dimen/_10sdp"
-                        app:cardSlider_smallScaleFactor="1" />
-
-                    <com.github.islamkhsh.CardSliderIndicator
-                        android:id="@+id/userMatchesSliderIndicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userMatchesSlider"
-                        android:layout_centerHorizontal="true"
-                        app:defaultIndicator="@drawable/dot_default"
-                        app:indicatorMargin="@dimen/_2sdp"
-                        app:indicatorsToShow="5"
-                        app:selectedIndicator="@drawable/dot_selected" />
-
-                </RelativeLayout>
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layWallet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-                    android:background="@drawable/bg_home_contianer"
                     android:paddingBottom="@dimen/_10sdp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/tvWalletSummary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/wallet_summary"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/_13ssp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/ivWalletSummary"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="visible" />
-
-                    <ImageView
-                        android:id="@+id/ivWalletSummary"
-                        android:layout_width="@dimen/_23sdp"
-                        android:layout_height="@dimen/_23sdp"
-                        android:layout_marginEnd="@dimen/_4sdp"
-                        android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_search"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvWalletSummary"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvWalletSummary" />
-
-                    <include
-                        android:id="@+id/includeBalance"
-                        layout="@layout/item_wallet_balance"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_5sdp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvWalletSummary"
-                        app:layout_constraintWidth_default="percent"
-                        app:layout_constraintWidth_percent="0.50" />
-
-                    <include
-                        android:id="@+id/includeNetPremium"
-                        layout="@layout/item_wallet_balance"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_5sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvWalletSummary"
-                        app:layout_constraintWidth_default="percent"
-                        app:layout_constraintWidth_percent="0.50" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible">
 
                     <include
                         android:id="@+id/includeMonthlyPayOut"
@@ -120,7 +44,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/includeBalance"
                         app:layout_constraintWidth_default="percent"
                         app:layout_constraintWidth_percent="0.50" />
 
@@ -131,20 +54,12 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/includeBalance"
                         app:layout_constraintWidth_default="percent"
                         app:layout_constraintWidth_percent="0.50" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
-
-            <!-- MainActivity already contains a toolbar so remove it -->
-            <!--<androidx.appcompat.widget.Toolbar
-                style="@style/TransparentToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />-->
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -158,18 +73,6 @@
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.github.islamkhsh.CardSliderViewPager
-            android:id="@+id/offersSlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_14sdp"
-            android:visibility="invisible"
-            app:auto_slide_time="5"
-            app:cardSlider_otherPagesWidth="@dimen/_18sdp"
-            app:cardSlider_pageMargin="@dimen/_2sdp"
-            app:cardSlider_smallScaleFactor="0.8"
-            tools:visibility="visible" />
-
     </RelativeLayout>
 
     <!-- NestedScrollView below the second layout (Use margin gap) -->
@@ -179,12 +82,135 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:paddingTop="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/layName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10sdp"
+                android:paddingStart="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hi"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:maxLines="1"
+                    android:textColor="@color/secondary"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold"
+                    tools:text="@string/developer" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/layBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layName">
+
+                <com.github.islamkhsh.CardSliderViewPager
+                    android:id="@+id/bannerSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:auto_slide_time="5"
+                    app:cardSlider_indicator="@id/bannerSliderIndicator"
+                    app:cardSlider_otherPagesWidth="0dp"
+                    app:cardSlider_pageMargin="@dimen/_2sdp"
+                    app:cardSlider_smallScaleFactor="0.8" />
+
+                <com.github.islamkhsh.CardSliderIndicator
+                    android:id="@+id/bannerSliderIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bannerSlider"
+                    android:layout_centerHorizontal="true"
+                    app:defaultIndicator="@drawable/dot_default"
+                    app:indicatorMargin="@dimen/_2sdp"
+                    app:indicatorsToShow="5"
+                    app:selectedIndicator="@drawable/dot_selected" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layPerformance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layBanner">
+
+                <TextView
+                    android:id="@+id/tvMyPerformance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:padding="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="@string/my_performance"
+                    android:textColor="@color/secondary"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    tools:visibility="visible" />
+
+                <!-- @color/nav_item_tint_default -->
+                <ImageView
+                    android:id="@+id/layFilters"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_alignTop="@+id/tvMyPerformance"
+                    android:layout_alignBottom="@+id/tvMyPerformance"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:src="@drawable/ic_filter_list_24"
+                    app:tint="?android:textColorPrimary" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tvMyPerformance"
+                    android:layout_alignBottom="@+id/tvMyPerformance"
+                    android:layout_toStartOf="@+id/layFilters"
+                    android:layout_toEndOf="@+id/tvMyPerformance"
+                    android:background="@null"
+                    app:tabGravity="fill"
+                    app:tabIndicator="@null"
+                    app:tabPaddingEnd="0dp"
+                    app:tabPaddingStart="0dp"
+                    app:tabRippleColor="@null" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tabLayout" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layInsurancePolices"
@@ -192,19 +218,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:background="@drawable/bg_home_contianer"
-                android:paddingBottom="@dimen/_16sdp"
+                android:paddingBottom="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/layPerformance">
 
                 <TextView
                     android:id="@+id/tvInsurancePolices"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_10sdp"
-                    android:text="@string/insurance_polices"
-                    android:textColor="?android:textColorPrimary"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="@string/insurance"
+                    android:textColor="@color/secondary"
                     android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -221,31 +247,32 @@
                     android:orientation="vertical"
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="5"
+                    app:spanCount="4"
                     tools:listitem="@layout/item_insurance_policy"
                     tools:visibility="visible" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layRecentCases"
+                android:id="@+id/layMyRenewal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:background="@drawable/bg_home_contianer"
                 android:paddingBottom="@dimen/_16sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layInsurancePolices">
 
                 <TextView
-                    android:id="@+id/tvRecentCases"
+                    android:id="@+id/tvMyRenewal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_10sdp"
-                    android:text="@string/recent_cases"
-                    android:textColor="?android:textColorPrimary"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="@string/my_renewal"
+                    android:textColor="@color/secondary"
                     android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -253,14 +280,56 @@
                     tools:visibility="visible" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvRecentCases"
+                    android:id="@+id/rvMyRenewal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvRecentCases"
+                    android:layout_below="@+id/tvMyRenewal"
                     android:layout_marginEnd="@dimen/_2sdp"
                     android:orientation="vertical"
                     android:overScrollMode="never"
-                    tools:listitem="@layout/item_upcoming_match"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="4"
+                    tools:listitem="@layout/item_insurance_policy"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layOther"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layMyRenewal">
+
+                <TextView
+                    android:id="@+id/tvOthers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="@string/others"
+                    android:textColor="@color/secondary"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOthers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvOthers"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="4"
+                    tools:listitem="@layout/item_insurance_policy"
                     tools:visibility="visible" />
 
             </RelativeLayout>

@@ -4,11 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.safekaro.partner.model.repository.MainRepository
 import com.safekaro.partner.ui.common.GlobalAction
 import com.safekaro.partner.ui.common.UiAction
 import com.safekaro.partner.utils.ApiDataLoader
+import com.safekaro.partner.utils.Resource
 import com.safekaro.partner.utils.SingleEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class MainActivityViewModel(
     context: Application,
@@ -24,6 +27,29 @@ class MainActivityViewModel(
 ) : AndroidViewModel(context) {
 
     val userDataRes = ApiDataLoader { mainRepository.getUserDataApiCall() }
+
+    private var mStartDate = MutableLiveData<Date>()
+    private var mEndDate = MutableLiveData<Date>()
+
+    fun setDashBoardDate(startDate: Date, endDate: Date) {
+        mStartDate.value = startDate
+        mEndDate.value = endDate
+    }
+
+    fun getDashboardData(partnerId: String, startDate: String, endDate: String) = liveData {
+        emit(Resource.Loading)
+        emit(mainRepository.getPartnerDashboard(startDate, endDate, partnerId))
+    }
+
+    fun getRankData(partnerId: String) = liveData {
+        emit(Resource.Loading)
+        emit(mainRepository.getRankData(partnerId))
+    }
+
+    fun getWalletCreditDebit(partnerId: String, startDate: String, endDate: String) = liveData {
+        emit(Resource.Loading)
+        emit(mainRepository.getWalletCreditDebit(startDate, endDate, partnerId))
+    }
 
 //    val upcomingMatchesRes = ApiDataLoaderPaged<Match, UpcomingMatches> { page ->
 //        mainRepository.getUpcomingMatchesApiCall(page)

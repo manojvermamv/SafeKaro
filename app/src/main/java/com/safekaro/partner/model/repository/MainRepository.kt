@@ -9,6 +9,9 @@ import com.safekaro.partner.model.remote.RetrofitClient
 import com.safekaro.partner.utils.Resource
 import com.google.gson.Gson
 import com.safekaro.partner.model.data.LoginUserRequest
+import com.safekaro.partner.model.models.PartnerDashboardRes
+import com.safekaro.partner.model.models.RankData
+import com.safekaro.partner.model.models.WalletCreditDebit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -30,6 +33,27 @@ class MainRepository(private val source: ContentDataSource) {
         return withContext(Dispatchers.IO) {
             delay(20)
             makeApiCall { api.loginWithMail(loginRequest) }
+        }
+    }
+
+    suspend fun getPartnerDashboard(startDate: String, endDate: String, partnerId: String): Resource<PartnerDashboardRes> {
+        return withContext(Dispatchers.IO) {
+            delay(20)
+            makeApiCall { api.getPartnerDashboard(startDate, endDate, partnerId) }
+        }
+    }
+
+    suspend fun getRankData(partnerId: String): Resource<RankData> {
+        return withContext(Dispatchers.IO) {
+            delay(20)
+            makeApiCall { api.getRankData(partnerId) }
+        }
+    }
+
+    suspend fun getWalletCreditDebit(startDate: String, endDate: String, partnerId: String): Resource<WalletCreditDebit> {
+        return withContext(Dispatchers.IO) {
+            delay(20)
+            makeApiCall { api.getWalletCreditDebit(startDate, endDate, partnerId) }
         }
     }
 

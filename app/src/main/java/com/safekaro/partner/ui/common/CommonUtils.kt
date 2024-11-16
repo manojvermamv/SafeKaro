@@ -8,10 +8,42 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
 import android.widget.TextView
+import androidx.viewbinding.ViewBinding
+import com.google.android.material.snackbar.Snackbar
 import com.safekaro.partner.R
+import com.safekaro.partner.model.data.BannerData
+import com.safekaro.partner.model.data.InsurancePolicy
 
 class CommonUtils {
 }
+
+
+fun getInsurancePolices() = mutableListOf(
+    InsurancePolicy("Pvt Car", R.drawable.ic_insurance_car),
+    InsurancePolicy("2 Wheeler", R.drawable.ic_insurance_two_wheeler),
+    InsurancePolicy("GCCV", R.drawable.ic_insurance_gccv),
+    InsurancePolicy("PCCV", R.drawable.ic_insurance_pccv),
+    InsurancePolicy("Endorsement", R.drawable.ic_insurance_endorsement),
+    InsurancePolicy("Miscellaneous", R.drawable.ic_insurance_miscellaneous),
+)
+
+fun getMyRenewals() = mutableListOf(
+    InsurancePolicy("Car", R.drawable.ic_renewal_car),
+    InsurancePolicy("Non Motor", R.drawable.ic_renewal__nonmotor),
+    InsurancePolicy("Life", R.drawable.ic_renewal__life),
+    InsurancePolicy("Health", R.drawable.ic_renewal_health),
+)
+
+fun getOthers() = mutableListOf(
+    InsurancePolicy("Add Lead", R.drawable.ic_generate_lead),
+    InsurancePolicy("Add Booking", R.drawable.ic_booking_request),
+)
+
+fun getBanners() = mutableListOf(
+    BannerData("", "", R.drawable.img_banner_1),
+    BannerData("", "", R.drawable.img_banner_1),
+    BannerData("", "", R.drawable.img_banner_1),
+)
 
 fun TextView.setupPrivacyPolicy() {
     val mColor = context.getColor(R.color.primary)
@@ -61,4 +93,10 @@ fun TextView.setupDontHaveAccount(fullText: String, clickableText: String, onCli
 
     text = spannableString
     movementMethod = android.text.method.LinkMovementMethod.getInstance()
+}
+
+fun ViewBinding.showError(message: String? = null, refreshData: () -> Unit = {}) {
+    Snackbar.make(this.root, message ?: "Some Error Occurred", Snackbar.LENGTH_LONG)
+        .setAction("Retry") { refreshData() }
+        .show()
 }

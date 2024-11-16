@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.safekaro.partner.model.models.Rank
 import com.safekaro.partner.model.models.UserData
 import java.lang.reflect.Type
 
@@ -90,6 +91,9 @@ class SharedPreferenceManager constructor(private val context: Context) {
     fun userData(value: UserData) = write(PrefParam.USER_DATA, value, UserData::class.java)
     fun userData(): UserData = read(PrefParam.USER_DATA, UserData("", ""))
 
+    fun rankData(value: Rank) = write(PrefParam.RANK_DATA, value, Rank::class.java)
+    fun rankData(): Rank = read(PrefParam.RANK_DATA, Rank("", ""))
+
 }
 
 /**
@@ -104,7 +108,8 @@ enum class PrefParam {
     USER_PASSWORD,
 
     // app settings keys
-    USER_DATA;
+    USER_DATA,
+    RANK_DATA;
 
     fun key() = name.lowercase().trim()
 }

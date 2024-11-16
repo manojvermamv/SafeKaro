@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.constraintlayout)
@@ -64,6 +65,8 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+
+    implementation(libs.jetbrainsKotlinReflect)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

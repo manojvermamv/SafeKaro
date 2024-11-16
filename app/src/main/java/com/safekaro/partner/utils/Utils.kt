@@ -26,11 +26,13 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Duration
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.Date
 
 
 /**
@@ -215,12 +217,32 @@ fun View.getDrawableCompat(@DrawableRes id: Int): Drawable? {
 /**
  * Date Time formating
  * */
+fun formatDateApi(date: Date? = null): String {
+    // Parse the ISO 8601 date string to Instant
+    date ?: return ""
+    val instant = DateTimeUtils.toInstant(date)
+    val dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+    return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+}
+
 fun formatDateTime(dateTimeMillis: Long): String {
     val dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateTimeMillis), ZoneId.systemDefault())
     return if (dateTime.toLocalDate() == LocalDateTime.now().toLocalDate()) {
         "Today, ${dateTime.format(DateTimeFormatter.ofPattern("h.mma"))}"
     } else {
         dateTime.format(DateTimeFormatter.ofPattern("d MMM, h.mma")) // EEE, d MMM yyyy, h.mma
+    }
+}
+
+fun formatDateTime(dateTimeString: String? = null): String {
+    // Parse the ISO 8601 date string to Instant
+    dateTimeString ?: return ""
+    val instant = Instant.parse(dateTimeString)
+    val dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+    return if (dateTime.toLocalDate() == LocalDateTime.now().toLocalDate()) {
+        "Today, ${dateTime.format(DateTimeFormatter.ofPattern("h.mma"))}"
+    } else {
+        dateTime.format(DateTimeFormatter.ofPattern("d MMM, h.mma"))
     }
 }
 

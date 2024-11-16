@@ -1,5 +1,8 @@
 <resources>
     <string name="home">Home</string>
+    <string name="team">Team</string>
+    <string name="my_policy">My Policy</string>
+    <string name="my_wallet">My Wallet</string>
     <string name="renewals">Renewals</string>
     <string name="cases">Cases</string>
     <string name="support">Support</string>
@@ -11,10 +14,12 @@
 
     <string name="search">Search</string>
     <string name="refresh">Refresh</string>
-    <string name="hi_developer">Developer</string>
+    <string name="hi">Hi,</string>
+    <string name="developer">Developer</string>
     <string name="lineups_out">Lineups Out</string>
-    <string name="insurance_polices">Insurance polices</string>
-    <string name="recent_cases">Recent Cases</string>
+    <string name="insurance">Insurance</string>
+    <string name="my_renewal">My Renewal</string>
+    <string name="my_performance">My Performance</string>
     <string name="not_started">Not started</string>
     <string name="live">Live</string>
     <string name="completed">Completed</string>
@@ -24,8 +29,10 @@
     <string name="contests">Contests</string>
     <string name="top_running_rank">Top Running Rank :</string>
     <string name="count_placeholder">(%d)</string>
-    <string name="ruppe_symbol_placeholder">₹ %s</string>
     <string name="ruppe_symbol">₹</string>
+    <string name="ruppe_symbol_placeholder">₹ %s</string>
+    <string name="ruppe_symbol_credit">Credit:  ₹ %s</string>
+    <string name="ruppe_symbol_debit">Debit:  ₹ %s</string>
 
     <string name="wallet_payout_paid">₹ %s - Paid</string>
     <string name="wallet_payout_unpaid">₹ %s - UnPaid</string>
@@ -65,5 +72,6 @@
     <string name="already_have_an_account">Already have an account? Log In</string>
     <string name="enter_email_phone_no">Enter email / Phone no.</string>
     <string name="enter_password">Enter Password</string>
+    <string name="others">Others</string>
 
 </resources>

@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- not selected color -->
-    <item android:drawable="@drawable/ic_home_outline" android:state_selected="false" />
+    <item android:drawable="@drawable/ic_nav_home_outline" android:state_selected="false" />
 
     <!-- selected color -->
-    <item android:drawable="@drawable/ic_home_filled" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_nav_home_filled" android:state_selected="true" />
 
 </selector>

@@ -4,40 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_5sdp"
-    android:layout_marginTop="@dimen/_5sdp">
+    android:layout_marginStart="@dimen/_6sdp"
+    android:layout_marginTop="@dimen/_6sdp"
+    android:layout_marginEnd="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_2sdp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_dash_view"
         android:orientation="vertical"
+        android:padding="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="@dimen/_42sdp"
-            android:layout_height="@dimen/_42sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/bg_circle_secondary_16"
-            android:padding="@dimen/_12sdp"
-            app:tint="?android:textColorPrimary"
-            tools:src="@drawable/ic_insurance_motor" />
+            android:layout_marginStart="@dimen/_9sdp"
+            android:layout_marginEnd="@dimen/_9sdp"
+            android:padding="@dimen/_8sdp"
+            app:tint="@color/primary"
+            tools:src="@drawable/ic_renewal_car" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/font_family"
             android:maxLines="1"
             android:textColor="?android:textColorPrimary"
             android:textFontWeight="600"
-            android:textSize="@dimen/_11ssp"
+            android:textSize="@dimen/_9ssp"
             tools:text="@string/app_name" />
 
     </LinearLayout>

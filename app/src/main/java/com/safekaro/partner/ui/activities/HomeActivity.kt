@@ -2,6 +2,7 @@ package com.safekaro.partner.ui.activities
 
 import android.Manifest
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -30,10 +32,10 @@ import com.safekaro.partner.utils.NetworkConnection
 import com.safekaro.partner.utils.SingleEvent
 import com.safekaro.partner.utils.awaitLayoutChange
 import com.safekaro.partner.utils.isAllPermissionsGranted
+import com.safekaro.partner.utils.observe
 import com.safekaro.partner.utils.observeEvent
 import com.safekaro.partner.utils.onBackPressed
 import com.safekaro.partner.utils.registerForMultiplePermissionsResult
-import com.safekaro.partner.utils.requestPermission
 import com.safekaro.partner.utils.setGradientTextColor
 import com.safekaro.partner.utils.setLightStatusBar
 import com.safekaro.partner.utils.showToast
@@ -123,17 +125,26 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             }
         }
 
-        binding.tvName.text = prefs.userData().name
-        binding.navView.getHeaderView(0)?.let {
-            it.findViewById<TextView>(R.id.tvUsername)?.text = prefs.userData().name
-            it.findViewById<TextView>(R.id.tvUserMail)?.text = prefs.userData().email
-        }
+        // Set custom colors programmatically
+        val selectedColor = getColor(R.color.secondary) // Replace with your desired color
+        val unselectedColor = getColor(R.color.black) // Replace with your desired color
+        val colorStateList = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_checked), // Selected state
+                intArrayOf(-android.R.attr.state_checked) // Unselected state
+            ),
+            intArrayOf(selectedColor, unselectedColor)
+        )
+        binding.navView.itemIconTintList = colorStateList
+        binding.navView.itemTextColor = colorStateList
 
         setupViews()
+        setupNavHeader()
         updateTextWithGradient()
         registerViewPagerAdapter(this, this, supportFragmentManager)
         setupBottomNavigation(binding.viewPager, binding.tabLayout, onPageChangeCallback)
 
+        fetchRankData()
         observeActions()
         observeEvent(viewModel.progressBar, ::triggerProgressBar)
         //requestPermission(permissions, relationalMsg, permissionsLauncher)
@@ -146,8 +157,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.navView.setCheckedItem(R.id.nav_dashboard)
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.nav_wallet -> WalletCreditDebitActivity.start(this, "Wallet")
             R.id.nav_logout -> {
                 prefs.clear()
                 restartApp()
@@ -165,8 +182,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         finish()
     }
 
+    private fun setupNavHeader() {
+        binding.navView.getHeaderView(0)?.let {
+            it.findViewById<TextView>(R.id.tvUsername)?.text = prefs.userData().name
+            it.findViewById<TextView>(R.id.tvUserMail)?.text = prefs.userData().partnerCode
+            it.findViewById<TextView>(R.id.tvUserRank)?.text = "${prefs.userData().role} (${prefs.rankData().rank ?: ""})"
+        }
+    }
+
     private fun setupViews() {
-        binding.tvName.text = getString(R.string.hi_developer)
         binding.layBalance.setOnClickListener { viewModel.globalAction(GlobalAction.WalletClick) }
         binding.ivNotification.setOnClickListener { viewModel.globalAction(GlobalAction.NotificationClick) }
         binding.ivUser.setOnClickListener { viewModel.globalAction(GlobalAction.ProfileClick) }
@@ -210,6 +234,19 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         event.getContentIfNotHandled()?.let {
             binding.progressBar.isVisible = it
         }
+    }
+
+    private fun fetchRankData() {
+        viewModel.getRankData(prefs.userData().partnerId ?: "").observe(this,
+            onError = { showToast(it) },
+            onLoading = { viewModel.triggerProgressBar(it) },
+            onSuccess = { data ->
+                data.data?.let {
+                    prefs.rankData(it)
+                    setupNavHeader()
+                }
+            },
+        )
     }
 
 }

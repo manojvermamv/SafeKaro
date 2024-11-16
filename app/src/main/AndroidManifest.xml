@@ -42,6 +42,9 @@
             android:name=".ui.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activities.WalletCreditDebitActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activities.ComingSoonActivity"
             android:screenOrientation="portrait" />
     </application>

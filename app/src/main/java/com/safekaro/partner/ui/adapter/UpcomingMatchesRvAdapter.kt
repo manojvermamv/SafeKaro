@@ -1,9 +1,7 @@
 package com.safekaro.partner.ui.adapter
 
-import android.content.res.ColorStateList
-import android.graphics.Color
+
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import com.safekaro.partner.databinding.ItemUpcomingMatchBinding
 import com.safekaro.partner.model.models.Match

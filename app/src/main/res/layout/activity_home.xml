@@ -44,18 +44,13 @@
                 android:paddingStart="@dimen/_16sdp"
                 android:paddingEnd="@dimen/_16sdp">
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_16sdp"
                     android:layout_toStartOf="@+id/ivNotification"
-                    android:gravity="start"
-                    tools:text="@string/hi_developer"
-                    android:textColor="@color/grey_800"
-                    android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold" />
+                    android:src="@drawable/ic_brand" />
 
                 <ImageView
                     android:id="@+id/ivNotification"
@@ -199,9 +194,10 @@
         android:layout_gravity="start"
         android:background="@color/background"
         android:fitsSystemWindows="false"
-        android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/drawer_menu">
+        app:itemBackground="@drawable/bg_nav_item"
+        app:menu="@menu/drawer_menu"
+        tools:visibility="gone">
 
     </com.google.android.material.navigation.NavigationView>
 

@@ -22,7 +22,7 @@ class ComingSoonActivity : BaseActivity<ActivityComingSoonBinding>(ActivityComin
         }
     }
 
-    private val title by lazy { intent.getStringExtra("title") ?: getString(R.string.hi_developer) }
+    private val title by lazy { intent.getStringExtra("title") ?: getString(R.string.developer) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
